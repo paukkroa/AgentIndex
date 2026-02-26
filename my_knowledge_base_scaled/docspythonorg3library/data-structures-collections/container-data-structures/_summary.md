@@ -1,0 +1,4 @@
+<!-- nav_summary: Core container modules & data structures -->
+The **Container Data Structures** section of the Python documentation provides a detailed exploration of built-in modules and abstract base classes designed to optimize data handling, sorting, and memory efficiency. It covers core components like `collections.abc` (abstract base classes for container protocols), `heapq` (priority queue implementations), `bisect` (efficient array bisection for maintaining sorted lists), and `array` (compact, memory-efficient numeric arrays). Together, these modules offer foundational tools for structured data manipulation, performance-critical operations, and adherence to Python’s container interfaces.
+
+---

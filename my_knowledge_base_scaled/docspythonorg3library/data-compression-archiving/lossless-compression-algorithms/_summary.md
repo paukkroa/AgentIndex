@@ -1,0 +1,4 @@
+<!-- nav_summary: Python lossless compression modules (Zstd, zlib, bzip2, LZMA) -->
+The **Lossless Compression Algorithms** section provides Python modules for implementing industry-standard lossless compression techniques, enabling efficient data reduction without sacrificing original information. It covers **Zstandard (Zstd)**, **zlib/gzip**, **bzip2**, and **LZMA** formats, detailing their respective modules (`compression.zstd`, `zlib`, `bz2`, and `lzma`) for compression/decompression operations, file handling, and interoperability with widely used formats. Each module offers optimized performance, compatibility, and support for common file extensions (e.g., `.zstd`, `.gz`, `.bz2`, `.xz`), making it ideal for applications requiring reliable data storage, transfer, or archival.
+
+---

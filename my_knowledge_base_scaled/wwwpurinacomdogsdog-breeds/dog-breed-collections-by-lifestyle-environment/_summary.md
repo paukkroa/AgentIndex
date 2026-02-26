@@ -1,0 +1,2 @@
+<!-- nav_summary: Curated breed guides by lifestyle & environment -->
+This section provides a curated guide to selecting dog breeds tailored to specific lifestyles and environmental needs, featuring a curated list of the **top 10 loyal companion breeds** ideal for active, protective, or affectionate owners, alongside an in-depth exploration of **15+ large breeds** categorized by temperament (active, protective, or cuddly) to help potential owners match their living situation with the perfect canine companion.

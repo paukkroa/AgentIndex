@@ -1,0 +1,2 @@
+<!-- nav_summary: Process management & thread-safe queues -->
+The **Inter-Process Communication & Synchronization** section covers mechanisms for managing and coordinating processes in Python, including the `subprocess` module for external process interaction and thread-safe queue implementations (FIFO, LIFO, priority, and unbounded) for synchronized data exchange between threads or processes.

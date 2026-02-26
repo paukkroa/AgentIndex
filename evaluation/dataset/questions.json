@@ -1,0 +1,422 @@
+[
+  {
+    "id": "SF-001",
+    "category": "SF",
+    "question": "What file does Claude Code use to store custom keyboard shortcut configurations?",
+    "gold_answer": "Claude Code stores custom keyboard shortcut configurations in ~/.claude/keybindings.json. This JSON-based configuration file allows users to define key bindings for different contexts such as Chat, Settings, and Global.",
+    "gold_sources": [
+      "codeclaudecomdocsen-configuration-customization-interface-ui-customization-customize-keyboard-shortcuts"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "SF-002",
+    "category": "SF",
+    "question": "What speed improvement does Claude Code's fast mode provide over standard mode?",
+    "gold_answer": "Claude Code's fast mode delivers approximately 2.5x faster responses compared to standard mode. It uses the Opus 4.6 model at a higher cost per token ($30/150 MTok vs. standard pricing) and can be toggled with the /fast command.",
+    "gold_sources": [
+      "codeclaudecomdocsen-configuration-customization-model-performance-tuning-speed-up-responses-with-fast-mode"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "SF-003",
+    "category": "SF",
+    "question": "What are the three built-in output styles available in Claude Code?",
+    "gold_answer": "The three built-in output styles in Claude Code are Default, Explanatory, and Learning. Output styles modify the system prompt to tailor Claude's behavior for different tasks while preserving core capabilities like scripting and file operations.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-output-styles"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "SF-004",
+    "category": "SF",
+    "question": "What is the purpose of the checkpointing feature in Claude Code?",
+    "gold_answer": "Checkpointing in Claude Code automatically saves the state of your code after each edit, allowing you to undo changes, rewind to prior versions, or summarize conversation history for better context management. It also supports branching sessions for experimentation, though it has limitations on tracking external or CLI changes.",
+    "gold_sources": [
+      "codeclaudecomdocsen-reference-technical-details-checkpointing"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "SF-005",
+    "category": "SF",
+    "question": "What command is used to check the current session cost in Claude Code?",
+    "gold_answer": "The /cost command is used to check the current session cost in Claude Code. This command shows token consumption and API costs for the active session.",
+    "gold_sources": [
+      "codeclaudecomdocsen-administration-management-cost-resource-optimization-manage-costs-effectively"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "SF-006",
+    "category": "SF",
+    "question": "What are the four configuration scopes available in Claude Code settings?",
+    "gold_answer": "The four configuration scopes in Claude Code settings are Managed, User, Project, and Local. These scopes control where settings apply and who they affect, with a defined precedence order for resolving conflicts.",
+    "gold_sources": [
+      "codeclaudecomdocsen-configuration-customization-tool-environment-configuration-claude-code-settings"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "SF-007",
+    "category": "SF",
+    "question": "What protocol does Claude Code use for connecting to external tools and services?",
+    "gold_answer": "Claude Code uses the Model Context Protocol (MCP) for connecting to external tools and services. MCP servers can be configured via HTTP, SSE, or local connections and support scope-based configurations at local, project, or user levels.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-tool-integration-extensibility-connect-claude-code-to-tools-via-mcp"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "SF-008",
+    "category": "SF",
+    "question": "What observability standard does Claude Code support for monitoring usage and performance metrics?",
+    "gold_answer": "Claude Code supports OpenTelemetry (OTel) for monitoring usage, performance, and cost metrics. It can be configured via environment variables and provides key metrics such as code edits, API requests, and token usage, as well as events like user prompts and API errors.",
+    "gold_sources": [
+      "codeclaudecomdocsen-administration-management-usage-tracking-analytics-monitoring"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "SF-009",
+    "category": "SF",
+    "question": "What is the name of the file format used to define custom skills in Claude Code?",
+    "gold_answer": "Custom skills in Claude Code are defined using SKILL.md files. These files use frontmatter for configuration and define new capabilities that Claude can automatically use or invoke via /skill-name slash commands.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-custom-agent-development-extend-claude-with-skills"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "SF-010",
+    "category": "SF",
+    "question": "Which browsers are supported by the Claude Code Chrome extension?",
+    "gold_answer": "The Claude Code Chrome extension supports Chrome and Edge browsers. It enables browser automation, live debugging, web app testing, form automation, and data extraction while leveraging the browser's logged-in sessions for secure interactions.",
+    "gold_sources": [
+      "codeclaudecomdocsen-platform-ide-integrations-use-claude-code-with-chrome-beta"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "MH-001",
+    "category": "MH",
+    "question": "How do Claude Code's permission rules interact with its sandboxing feature to provide defense-in-depth security?",
+    "gold_answer": "Claude Code uses a layered security approach. The permission system provides granular control via allow/ask/deny rules and mode-based settings (default, plan, delegate) for tool usage like file access, Bash commands, and web requests. Sandboxing adds OS-level enforcement on top of this, restricting filesystem and network access to predefined boundaries. Together, permissions control what Claude is allowed to do logically, while sandboxing provides a hard security boundary that prevents unauthorized access even if permission rules are misconfigured, reducing prompt injection risks.",
+    "gold_sources": [
+      "codeclaudecomdocsen-configuration-customization-configure-permissions",
+      "codeclaudecomdocsen-configuration-customization-sandboxing"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "MH-002",
+    "category": "MH",
+    "question": "How does the memory system in CLAUDE.md files relate to the settings configuration system, and which takes precedence when both define behavioral rules?",
+    "gold_answer": "CLAUDE.md files provide persistent context through markdown instructions covering rules, preferences, and project-specific guidance, loaded hierarchically (managed policy, project, user, auto memory). The settings system uses JSON-based scopes (Managed, User, Project, Local) for configuration like permissions, model selection, and hooks. When both define behavioral rules, the settings system handles structural configuration and permissions while CLAUDE.md handles conversational context and coding conventions. Settings precedence follows its scope hierarchy, and CLAUDE.md files are loaded into the system prompt alongside settings-defined configurations.",
+    "gold_sources": [
+      "codeclaudecomdocsen-manage-claudes-memory",
+      "codeclaudecomdocsen-configuration-customization-tool-environment-configuration-claude-code-settings"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "MH-003",
+    "category": "MH",
+    "question": "How can hooks and skills work together to create an automated code review workflow in Claude Code?",
+    "gold_answer": "Hooks are deterministic shell commands triggered at specific lifecycle stages (e.g., PreToolUse, PostToolUse, TaskCompleted) that can automate tasks like auto-formatting code or blocking edits to protected files. Skills are reusable capabilities defined in SKILL.md files that Claude can invoke via slash commands. Together, a skill could define a code review workflow (e.g., /review) that Claude executes, while hooks run automatically at lifecycle points to enforce formatting standards or run linters after code edits. Hooks handle the deterministic automation, while skills provide the judgment-based review logic.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-session-workflow-orchestration-automate-workflows-with-hooks",
+      "codeclaudecomdocsen-build-with-claude-code-custom-agent-development-extend-claude-with-skills"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "MH-004",
+    "category": "MH",
+    "question": "What is the relationship between Claude Code's agent teams feature and its subagents feature, and when should you use each?",
+    "gold_answer": "Agent teams allow multiple Claude Code instances to collaborate, with one session acting as team lead to coordinate tasks, assign work, and synthesize results from other instances. Subagents are specialized AI assistants created within a single session for specific tasks, configured with custom system prompts, tools, and permissions. Agent teams are best for parallel work across independent areas (like parallel code reviews or multi-hypothesis investigations), while subagents are better for delegating focused subtasks within a single workflow, with more fine-grained control over scope, cost, and execution (foreground/background).",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-session-workflow-orchestration-orchestrate-teams-of-claude-code-sessions",
+      "codeclaudecomdocsen-build-with-claude-code-custom-agent-development-create-custom-subagents"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "MH-005",
+    "category": "MH",
+    "question": "How does Claude Code's model configuration system interact with cost management strategies to help teams control spending?",
+    "gold_answer": "The model configuration system lets users select models via aliases (default, opus, sonnet) or full model names, and adjust effort level and context window size. This directly impacts costs since different models have different per-token pricing. Cost management strategies include using the /cost command to track session spending, setting workspace spend limits, leveraging rate limits, choosing cheaper models like Sonnet for routine tasks, and offloading work to subagents or plugins. By combining appropriate model selection with monitoring tools and spend limits, teams can optimize the cost-performance tradeoff.",
+    "gold_sources": [
+      "codeclaudecomdocsen-configuration-customization-model-performance-tuning-model-configuration",
+      "codeclaudecomdocsen-administration-management-cost-resource-optimization-manage-costs-effectively"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "MH-006",
+    "category": "MH",
+    "question": "How do the GitHub Actions and GitLab CI/CD integrations for Claude Code differ in their setup and triggering mechanisms?",
+    "gold_answer": "Claude Code GitHub Actions integrates via @claude commands in PRs and issues, using the Claude Agent SDK to generate code changes, fix bugs, and create pull requests. It supports model configuration including Claude Opus 4.6 and integration with AWS Bedrock/Google Vertex AI. Claude Code GitLab CI/CD integrates into GitLab pipelines to generate merge requests, implement code changes, and resolve issues from CI/CD jobs. Both support cloud provider backends (Bedrock, Vertex AI), but differ in their trigger mechanisms: GitHub uses @claude mentions in PR/issue comments, while GitLab uses CI/CD pipeline jobs. Setup approaches also differ, with GitLab offering both quick and manual setup paths.",
+    "gold_sources": [
+      "codeclaudecomdocsen-platform-ide-integrations-claude-code-github-actions",
+      "codeclaudecomdocsen-platform-ide-integrations-claude-code-gitlab-cicd"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "MH-007",
+    "category": "MH",
+    "question": "How does Claude Code's agentic loop architecture relate to the best practices recommended for prompt design and context management?",
+    "gold_answer": "Claude Code's agentic loop operates in three phases: context-gathering, action-taking, and verification. Best practices for prompt design align with this architecture by recommending clear, specific prompts that help Claude efficiently gather context, take targeted actions, and verify results. Context management best practices address the limited context window by recommending techniques like session management, using subagents for isolated tasks, and leveraging CLAUDE.md for persistent context. Effective prompts steer Claude through its loop more efficiently, while proper context management prevents performance degradation from context window saturation.",
+    "gold_sources": [
+      "codeclaudecomdocsen-getting-started-how-claude-code-works",
+      "codeclaudecomdocsen-core-concepts-architecture-best-practices-for-claude-code"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "MH-008",
+    "category": "MH",
+    "question": "How do development containers and sandboxing work together to create a secure Claude Code development environment?",
+    "gold_answer": "Development containers provide a preconfigured Docker-based environment with a security-focused firewall, VS Code integration, and session persistence for secure Node.js development. Sandboxing provides OS-level isolation restricting filesystem and network access to predefined boundaries. Together, devcontainers establish the outer security perimeter with Docker isolation and firewall rules, while sandboxing provides an inner security layer within the container that further restricts Claude's access. This defense-in-depth approach means that even within a container, Claude cannot access files or network resources outside the sandboxed boundaries.",
+    "gold_sources": [
+      "codeclaudecomdocsen-deployment-infrastructure-development-containers",
+      "codeclaudecomdocsen-configuration-customization-sandboxing"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "MH-009",
+    "category": "MH",
+    "question": "How can the Claude Code Slack integration leverage sessions from Claude Code on the web?",
+    "gold_answer": "The Claude Code Slack integration allows users to request AI-powered coding assistance directly within Slack conversations for tasks like bug fixes and code reviews. When a coding request is made in Slack, it routes the request to Claude Code on the web, which provides the full execution environment with access to tools, package managers, and cloud platforms. This means Slack acts as the conversational interface while Claude Code on the web handles the actual code execution, maintaining context within the Slack thread while leveraging the web environment's security policies and tool integrations.",
+    "gold_sources": [
+      "codeclaudecomdocsen-platform-ide-integrations-claude-code-in-slack",
+      "codeclaudecomdocsen-platform-ide-integrations-claude-code-on-the-web"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "MH-010",
+    "category": "MH",
+    "question": "How do server-managed settings relate to the authentication system for Claude for Teams and Enterprise deployments?",
+    "gold_answer": "Server-managed settings (public beta) provide centralized configuration for organizations without MDM or endpoint management, configured via the Claude.ai admin console. They require a Claude for Teams or Enterprise plan and a minimum client version. The authentication system supports Claude for Teams/Enterprise as the recommended method for centralized billing and team management, alongside Claude Console authentication for API-based billing and cloud provider authentication. Server-managed settings build on the Teams/Enterprise authentication to deliver organization-wide configuration policies, with a defined precedence relative to endpoint-managed settings.",
+    "gold_sources": [
+      "codeclaudecomdocsen-administration-management-system-configuration-setup-configure-server-managed-settings-public-beta",
+      "codeclaudecomdocsen-administration-management-authentication"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "COMP-001",
+    "category": "COMP",
+    "question": "Compare the three cloud provider deployment options for Claude Code: Amazon Bedrock, Google Vertex AI, and Microsoft Foundry.",
+    "gold_answer": "All three cloud providers support deploying Claude Code with their respective AI infrastructure. Amazon Bedrock requires AWS account setup, IAM permissions, and supports credential configuration via AWS CLI, environment variables, SSO, or Bedrock API keys. Google Vertex AI requires GCP setup with billing and model access, has region-specific considerations, and uses GCP credentials and environment variables. Microsoft Foundry requires an Azure subscription, RBAC permissions, and Azure CLI, supporting authentication via API keys or Microsoft Entra ID. All three support Claude's Opus, Sonnet, and Haiku models, but differ in their credential management, region availability, and authentication methods.",
+    "gold_sources": [
+      "codeclaudecomdocsen-deployment-infrastructure-claude-code-on-amazon-bedrock",
+      "codeclaudecomdocsen-deployment-infrastructure-claude-code-on-google-vertex-ai",
+      "codeclaudecomdocsen-deployment-infrastructure-claude-code-on-microsoft-foundry"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "COMP-002",
+    "category": "COMP",
+    "question": "Compare plugins and skills in Claude Code: when should you create a plugin versus a skill?",
+    "gold_answer": "Skills are individual capabilities defined in SKILL.md files with frontmatter configuration, invokable via slash commands, and suited for adding specific new abilities like code review or deployment workflows. Plugins are broader packages that can bundle multiple skills, LSP servers, and hooks together for shared, reusable functionality distributed through marketplaces. You should create a skill when you need a single, focused capability for personal or project use. You should create a plugin when you want to package multiple related features for distribution to teams or communities, or when you need to include components beyond just skills (like hooks or servers).",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-custom-agent-development-extend-claude-with-skills",
+      "codeclaudecomdocsen-build-with-claude-code-custom-agent-development-create-plugins"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "COMP-003",
+    "category": "COMP",
+    "question": "Compare Claude Code's desktop application with the VS Code extension in terms of features and workflow.",
+    "gold_answer": "The Claude Code desktop app is a standalone graphical application with dedicated tabs for Code, Cowork, and Chat modes, offering visual session management and real-time file editing similar to the CLI but with a GUI. The VS Code extension integrates directly into the VS Code editor with prompt editing, file referencing, multi-conversation support, and Git integration. The desktop app is better for dedicated AI coding sessions with its focused interface, while the VS Code extension is better for developers who want AI assistance embedded in their existing editor workflow. Both share configurations with the CLI and support hooks, permissions, and external tool connections.",
+    "gold_sources": [
+      "codeclaudecomdocsen-getting-started-use-claude-code-desktop",
+      "codeclaudecomdocsen-platform-ide-integrations-use-claude-code-in-vs-code"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "COMP-004",
+    "category": "COMP",
+    "question": "Compare deterministic hooks with prompt-based and agent-based hooks in Claude Code for automating workflows.",
+    "gold_answer": "Deterministic hooks are custom shell commands triggered at specific lifecycle stages that execute predictably every time (e.g., auto-formatting code after edits or blocking changes to protected files). They use matchers, structured JSON output, and exit codes for control. Prompt-based hooks inject additional instructions into Claude's context to influence its behavior through guidance rather than enforcement. Agent-based hooks delegate decisions to a separate AI agent for more nuanced judgment. Deterministic hooks are best for strict, predictable enforcement; prompt-based hooks for soft guidance; and agent-based hooks for complex decisions requiring reasoning.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-session-workflow-orchestration-automate-workflows-with-hooks",
+      "codeclaudecomdocsen-reference-technical-details-hooks-reference"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "COMP-005",
+    "category": "COMP",
+    "question": "Compare Claude for Teams and Claude for Enterprise deployment options in terms of features, billing, and access controls.",
+    "gold_answer": "Claude for Teams is a self-service option focused on collaboration, while Claude for Enterprise adds SSO, compliance features, and role-based access controls. Both support centralized billing, but Enterprise provides more granular security and administrative capabilities. Teams is suited for smaller organizations that need shared access and simple management, while Enterprise targets larger organizations with strict compliance requirements, advanced authentication (SSO), and more detailed access control policies. Both can be used with Claude Code and support server-managed settings for centralized configuration.",
+    "gold_sources": [
+      "codeclaudecomdocsen-deployment-infrastructure-enterprise-deployment-overview",
+      "codeclaudecomdocsen-administration-management-authentication"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "COMP-006",
+    "category": "COMP",
+    "question": "Compare auto memory and CLAUDE.md files as mechanisms for providing persistent context to Claude Code.",
+    "gold_answer": "Auto memory automatically captures and persists session context like preferences and patterns across sessions without manual configuration. CLAUDE.md files are manually created and maintained markdown files containing explicit instructions, rules, and project-specific guidance. Auto memory is convenient and requires no setup but offers less control over what is remembered. CLAUDE.md files provide precise, structured control with support for modular rules, glob patterns, and hierarchical loading (managed policy, project, user levels). Auto memory is best for evolving personal preferences, while CLAUDE.md files are best for team-shared conventions and project-specific requirements.",
+    "gold_sources": [
+      "codeclaudecomdocsen-manage-claudes-memory"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "COMP-007",
+    "category": "COMP",
+    "question": "Compare running Claude Code headlessly via the CLI SDK versus using it in interactive mode.",
+    "gold_answer": "Headless mode (claude -p flag) supports non-interactive, programmatic execution with structured output (JSON/text/streaming), tool approvals, conversation continuation, and custom system prompts, making it ideal for CI/CD pipelines, scripts, and automation. Interactive mode provides a real-time conversational interface with keyboard shortcuts, Vim mode, multiline input, background commands, task management, model switching, and permission toggles. Headless mode is optimized for automation and integration; interactive mode is optimized for human developer workflows. The full Agent SDK (Python/TypeScript) extends headless capabilities further with hooks and native message handling.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-run-claude-code-programmatically",
+      "codeclaudecomdocsen-reference-technical-details-interactive-mode"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "COMP-008",
+    "category": "COMP",
+    "question": "How do data usage policies differ between free/consumer Claude Code accounts and commercial (Team/Enterprise/API) accounts?",
+    "gold_answer": "Free/Pro/Max (consumer) accounts may have their data used for model training unless the user disables this option. Commercial users (Team/Enterprise/API) have stricter data controls by default and their data is not used for training unless they explicitly opt into programs like the Development Partner Program. Both account types generate telemetry data, but commercial accounts benefit from stronger data retention controls. Data flow also differs between local and cloud execution environments.",
+    "gold_sources": [
+      "codeclaudecomdocsen-administration-management-cost-resource-optimization-data-usage"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "COMP-009",
+    "category": "COMP",
+    "question": "Compare the GitHub Actions integration and the Slack integration for Claude Code in terms of use cases and workflow.",
+    "gold_answer": "GitHub Actions integration is designed for CI/CD automation, triggered by @claude mentions in PRs and issues to generate code changes, fix bugs, and create pull requests programmatically. It runs within GitHub's infrastructure and is suited for automated code generation and review workflows. The Slack integration provides conversational coding assistance within Slack channels, routing requests to Claude Code on the web for execution. It is suited for ad-hoc coding requests, bug fixes, and code reviews in team communication contexts. GitHub Actions is asynchronous and pipeline-oriented, while Slack is conversational and interactive.",
+    "gold_sources": [
+      "codeclaudecomdocsen-platform-ide-integrations-claude-code-github-actions",
+      "codeclaudecomdocsen-platform-ide-integrations-claude-code-in-slack"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "COMP-010",
+    "category": "COMP",
+    "question": "Compare using an LLM gateway with direct API access for Claude Code in an enterprise environment.",
+    "gold_answer": "An LLM gateway acts as a centralized proxy providing authentication, usage tracking, cost controls, and model routing, requiring specific API format support (Anthropic Messages, Bedrock InvokeModel, Vertex rawPredict). It enables centralized control for enterprises with compliance requirements. Direct API access connects Claude Code directly to the Anthropic API or cloud provider endpoints, offering simpler setup but less centralized control. LLM gateways add overhead but provide enterprise benefits like audit logging, rate limiting, and policy enforcement. LiteLLM is a supported gateway option with static API key authentication and proxy server configuration.",
+    "gold_sources": [
+      "codeclaudecomdocsen-deployment-infrastructure-llm-gateway-configuration",
+      "codeclaudecomdocsen-deployment-infrastructure-enterprise-network-configuration"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "PROC-001",
+    "category": "PROC",
+    "question": "What are the steps to install Claude Code and complete the initial setup on a new machine?",
+    "gold_answer": "To install and set up Claude Code: 1) Verify system requirements (supported OS, hardware, network connectivity, and supported location). 2) Choose an installation method: native installer, Homebrew (macOS), or WinGet (Windows). Note that NPM installation is deprecated. 3) Run the installer for your platform. 4) Authenticate with your Claude account (Claude for Teams/Enterprise, Claude Console API key, or cloud provider credentials). 5) Verify the installation by launching Claude Code. 6) Optionally configure settings, permissions, and CLAUDE.md files for your project. Platform-specific setup may require additional dependencies like Node.js and ripgrep.",
+    "gold_sources": [
+      "codeclaudecomdocsen-administration-management-system-configuration-setup-set-up-claude-code"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "PROC-002",
+    "category": "PROC",
+    "question": "How do you create and configure a custom skill in Claude Code from scratch?",
+    "gold_answer": "To create a custom skill in Claude Code: 1) Create a SKILL.md file in your project or user directory. 2) Add frontmatter configuration at the top of the file specifying metadata like the skill name, description, and access settings. 3) Write the skill instructions in markdown format below the frontmatter, defining what the skill does and how Claude should execute it. 4) Optionally configure arguments that the skill can accept. 5) Test the skill by invoking it with /skill-name in Claude Code. 6) Optionally share the skill with others. Advanced patterns include dynamic context injection and subagent execution within skills.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-custom-agent-development-extend-claude-with-skills"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "PROC-003",
+    "category": "PROC",
+    "question": "What are the steps to set up Claude Code monitoring with OpenTelemetry?",
+    "gold_answer": "To set up Claude Code monitoring with OpenTelemetry: 1) Choose and configure an OpenTelemetry-compatible backend for receiving metrics and events. 2) Set the required environment variables to enable OTel export from Claude Code (quick-start setup). 3) Configure the metrics you want to track (code edits, API requests, token usage). 4) Configure events to capture (user prompts, API errors). 5) Set up alerting and segmentation rules based on your monitoring needs. 6) Verify data is flowing to your backend. Note that users are responsible for backend configuration and aggregation granularity.",
+    "gold_sources": [
+      "codeclaudecomdocsen-administration-management-usage-tracking-analytics-monitoring"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "PROC-004",
+    "category": "PROC",
+    "question": "How do you configure Claude Code to work with Amazon Bedrock as the backend provider?",
+    "gold_answer": "To configure Claude Code with Amazon Bedrock: 1) Set up an AWS account with appropriate IAM permissions. 2) Request and enable model access for the Claude models you want to use. 3) Configure AWS credentials using one of the supported methods: AWS CLI, environment variables, SSO, or Bedrock API keys. 4) Submit any required use case details. 5) Set Claude Code configuration to point to Bedrock by configuring the appropriate environment variables and model settings. 6) Optionally set up advanced credential refresh options. 7) Test the connection to verify Claude Code can communicate with Bedrock.",
+    "gold_sources": [
+      "codeclaudecomdocsen-deployment-infrastructure-claude-code-on-amazon-bedrock"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "PROC-005",
+    "category": "PROC",
+    "question": "What is the process for creating a custom Claude Code plugin and distributing it through a marketplace?",
+    "gold_answer": "To create and distribute a plugin: 1) Decide if a plugin is appropriate (for shared, reusable functionality vs. standalone configs). 2) Create the plugin directory structure with the required components (skills, optional LSP servers, and hooks). 3) Follow the quickstart to build a basic plugin. 4) Test the plugin locally and debug any issues. 5) Package the plugin for distribution. 6) To distribute via a marketplace, create a marketplace.json schema defining plugin entries with Git repository URLs, local paths, or metadata. 7) Host the marketplace (preferably on GitHub). 8) Configure restrictions and test the marketplace. 9) Share the marketplace URL with users who can then add it and install plugins via CLI or interactive interface.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-custom-agent-development-create-plugins",
+      "codeclaudecomdocsen-build-with-claude-code-tool-integration-extensibility-discover-and-install-prebuilt-plugins-through-marketplaces"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "PROC-006",
+    "category": "PROC",
+    "question": "How do you set up and use Claude Code's development container for a secure development environment?",
+    "gold_answer": "To set up a development container for Claude Code: 1) Obtain the development container configuration, which includes a devcontainer.json, Dockerfile, and firewall scripts. 2) Ensure Docker is installed on your system. 3) Configure the devcontainer.json with your project-specific settings, including VS Code integration options and session persistence. 4) Build and start the container using VS Code's Dev Containers extension or the devcontainer CLI. The container provides a preconfigured Node.js environment with a security-focused firewall for network isolation. Review security considerations regarding permission bypassing, trusted repository use, and monitoring.",
+    "gold_sources": [
+      "codeclaudecomdocsen-deployment-infrastructure-development-containers"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "PROC-007",
+    "category": "PROC",
+    "question": "What are the steps to create a custom hook that auto-formats code after Claude makes edits?",
+    "gold_answer": "To create an auto-formatting hook in Claude Code: 1) Open your settings file (project .claude/settings.json or global ~/.claude/settings.json). 2) Add a hook configuration under the hooks section, targeting the PostToolUse lifecycle event (triggered after Claude edits code). 3) Define a matcher to target specific tool uses (e.g., file write operations). 4) Specify the shell command to run your formatter (e.g., prettier, black, or rustfmt) on the affected files. 5) Configure the hook to use structured JSON output if needed for reporting results. 6) Test the hook by having Claude make an edit and verifying the formatter runs automatically. 7) Troubleshoot using exit codes and hook output if the formatter does not execute as expected.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-session-workflow-orchestration-automate-workflows-with-hooks"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "PROC-008",
+    "category": "PROC",
+    "question": "How do you configure and customize the status line in Claude Code to display Git status and session cost?",
+    "gold_answer": "To customize the Claude Code status line: 1) Use the /statusline command in Claude Code to open the status line configuration, or manually edit the configuration. 2) The status line is a customizable bar at the bottom of the terminal that runs shell scripts to display real-time data. 3) Configure a shell script field that outputs Git status information (e.g., current branch, uncommitted changes) by calling git commands. 4) Add another field or combine it to display session cost data using available data fields. 5) Test the status line to ensure it updates in real-time. The status line supports multiple data fields and can display information like context usage, progress bars, and other custom metrics.",
+    "gold_sources": [
+      "codeclaudecomdocsen-configuration-customization-interface-ui-customization-customize-your-status-line"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "PROC-009",
+    "category": "PROC",
+    "question": "What are the steps to set up Claude Code's GitHub Actions integration for automated PR reviews?",
+    "gold_answer": "To set up Claude Code GitHub Actions for automated PR reviews: 1) Install the Claude Code GitHub Action in your repository. 2) Configure the GitHub Actions workflow YAML file to trigger on PR events. 3) Set up authentication by adding the required API key or cloud provider credentials as GitHub secrets. 4) Configure the action to respond to @claude mentions in PR comments for on-demand reviews. 5) Optionally configure the model (e.g., Claude Opus 4.6) and advanced settings like cloud provider integration (AWS Bedrock or Google Vertex AI). 6) Test the integration by mentioning @claude. 7) Review and adjust security settings and performance optimization as needed.",
+    "gold_sources": [
+      "codeclaudecomdocsen-platform-ide-integrations-claude-code-github-actions"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "PROC-010",
+    "category": "PROC",
+    "question": "How do you configure custom output styles in Claude Code using frontmatter syntax?",
+    "gold_answer": "To configure a custom output style in Claude Code: 1) Understand that output styles modify the system prompt to tailor Claude's behavior. 2) Create a custom style definition using the frontmatter syntax supported by Claude Code. 3) Write the style instructions that describe how Claude should modify its output behavior. 4) Save the style configuration to your .claude/settings.local.json file or apply it via CLI commands. 5) Switch to the custom style using the appropriate CLI command. 6) Verify that Claude's responses match your desired style. The three built-in styles (Default, Explanatory, Learning) can serve as references for creating custom styles.",
+    "gold_sources": [
+      "codeclaudecomdocsen-build-with-claude-code-output-styles"
+    ],
+    "difficulty": "medium"
+  }
+]

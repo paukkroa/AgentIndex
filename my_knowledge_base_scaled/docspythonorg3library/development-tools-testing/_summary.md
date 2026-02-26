@@ -1,0 +1,4 @@
+<!-- nav_summary: Core dev tools: typing, docs, testing, and debugging utilities -->
+The **Development Tools & Testing** section of the Python Standard Library offers a robust suite of modules and frameworks designed to enhance software development efficiency, code quality, and maintainability. It includes advanced **type hinting support** via the `typing` module for static analysis, **documentation automation** through `pydoc` (CLI/HTTP-based), and **comprehensive testing frameworks** for core regression tests and modular validation. Additionally, it covers **Python Development Mode** (Python 3.11+) for interactive debugging and **essential development utilities** that streamline workflows, from type checking to documentation generation and testing infrastructure.
+
+---

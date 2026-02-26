@@ -1,0 +1,2 @@
+<!-- nav_summary: Dog breeds by coat type & grooming needs -->
+This section organizes dog breeds into five distinct coat-type categories—long-haired, low-shedding, medium-haired, short-haired, and heavy-shedding—to help pet owners identify breeds that align with their lifestyle, grooming preferences, and allergy sensitivities. Each subcategory provides breed lists, key traits, and tailored grooming advice, ensuring informed decision-making for potential dog owners.

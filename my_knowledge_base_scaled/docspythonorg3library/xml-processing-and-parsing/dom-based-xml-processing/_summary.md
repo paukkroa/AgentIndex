@@ -1,0 +1,4 @@
+<!-- nav_summary: Python’s DOM XML Parsing & Manipulation Modules -->
+The **DOM-Based XML Processing** section provides a detailed overview of Python’s built-in modules for parsing, manipulating, and constructing XML data using the **Document Object Model (DOM)** standard. It covers the core `xml.dom` API, which defines the foundational interfaces for DOM operations, alongside specialized implementations like `xml.dom.minidom`—a lightweight, tree-based parser for full DOM trees—and `xml.dom.pulldom`—an event-driven approach for efficiently building partial DOM structures. Together, these modules enable developers to read, traverse, modify, and serialize XML documents with full control over the DOM hierarchy, catering to both complete document processing and incremental parsing needs.
+
+---

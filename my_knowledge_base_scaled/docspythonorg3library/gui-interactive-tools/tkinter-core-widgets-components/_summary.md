@@ -1,0 +1,4 @@
+<!-- nav_summary: Tkinter widgets, dialogs, utilities, and advanced components -->
+The **Tkinter Core Widgets & Components** section provides an in-depth exploration of the fundamental building blocks for constructing graphical user interfaces (GUIs) in Python using Tkinter. It covers a diverse range of widgets, including themed widgets from the `tkinter.ttk` module (18 types with customizable styling via the `Style` class), essential dialogs and prompts for user interaction, specialized components like the `ScrolledText` widget for multi-line text with built-in scrollbars, utility modules for color management and font handling, and experimental drag-and-drop functionality via `tkinter.dnd`. Additionally, it offers an overview of Tkinter’s GUI toolkit architecture and its Python interface, ensuring developers have a comprehensive understanding of both standard and advanced widget implementations to create robust and visually appealing applications.
+
+---

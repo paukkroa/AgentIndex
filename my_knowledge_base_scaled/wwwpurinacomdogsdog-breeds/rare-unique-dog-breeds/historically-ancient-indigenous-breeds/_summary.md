@@ -1,0 +1,4 @@
+<!-- nav_summary: Ancient & Indigenous Dog Breeds: Rare, Cultural, and Timeless -->
+This section explores **historically ancient and indigenous dog breeds**, each rooted in deep cultural heritage and evolutionary adaptation. From the **Carolina Dog**, a rare sighthound with fox-like traits native to the southeastern U.S., to the **Catahoula Leopard Dog**, a versatile Louisiana working breed with Native American lineage, these canines reflect centuries of regional survival and companionship. The **Xoloitzcuintli**, Mexico’s sacred hairless guardian, and the **Cirneco dell’Etna**, Sicily’s ancient low-maintenance hound, showcase global diversity in form and function. Together, these breeds highlight the enduring bond between humans and dogs, preserving genetic legacies tied to indigenous traditions, hunting, and protection.
+
+---

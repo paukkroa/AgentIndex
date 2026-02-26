@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agentic Index</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-card: #12121a;
+    --bg-hover: #1a1a2e;
+    --bg-active: #1e1e3a;
+    --border: #2a2a3e;
+    --text: #e0e0f0;
+    --text-dim: #8888aa;
+    --text-muted: #5a5a7a;
+    --accent: #6c63ff;
+    --accent-dim: #4a43cc;
+    --accent-glow: rgba(108, 99, 255, 0.15);
+    --green: #4ade80;
+    --yellow: #facc15;
+    --red: #f87171;
+    --blue: #60a5fa;
+    --radius: 10px;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Layout */
+  .app {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+  .header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+  .header h1 {
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header h1 .logo {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .header-actions { display: flex; gap: 8px; align-items: center; }
+
+  .sidebar {
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+  .sidebar-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-section h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .tree-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+
+  .main {
+    overflow-y: auto;
+    padding: 24px 32px;
+  }
+
+  /* Search */
+  .search-box {
+    display: flex;
+    gap: 0;
+    width: 100%;
+  }
+  .search-box input {
+    flex: 1;
+    padding: 8px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius) 0 0 var(--radius);
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+  }
+  .search-box input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+  }
+  .search-box button {
+    padding: 8px 14px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .search-box button:hover { background: var(--accent-dim); }
+
+  /* Tree */
+  .tree-node {
+    padding: 0;
+    user-select: none;
+  }
+  .tree-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 4px;
+    margin: 0 4px;
+    transition: background 0.1s;
+  }
+  .tree-row:hover { background: var(--bg-hover); }
+  .tree-row.active { background: var(--bg-active); color: var(--accent); }
+  .tree-toggle {
+    width: 16px; height: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .tree-toggle.expanded { transform: rotate(90deg); }
+  .tree-icon {
+    width: 16px; height: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .tree-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+  }
+  .tree-children {
+    padding-left: 20px;
+  }
+  .tree-children.collapsed { display: none; }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .card h3 {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+  .card p { color: var(--text-dim); font-size: 14px; margin-bottom: 12px; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+  .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--mono);
+  }
+  .badge-url { background: rgba(96, 165, 250, 0.15); color: var(--blue); }
+  .badge-file { background: rgba(74, 222, 128, 0.15); color: var(--green); }
+  .badge-group { background: rgba(136, 136, 170, 0.1); color: var(--text-muted); }
+
+  /* Node detail */
+  .node-meta {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .node-meta span {
+    display: flex; align-items: center; gap: 4px;
+  }
+  .node-summary {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 20px;
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+  }
+  .children-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .child-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .child-item:hover {
+    border-color: var(--accent);
+    background: var(--bg-hover);
+  }
+  .child-info { flex: 1; min-width: 0; }
+  .child-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .child-summary {
+    font-size: 13px;
+    color: var(--text-dim);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Content viewer */
+  .content-viewer {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  /* Search results */
+  .search-result {
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .search-result:hover {
+    border-color: var(--accent);
+    background: var(--bg-hover);
+  }
+  .search-score {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    float: right;
+  }
+
+  /* Source management */
+  .source-card {
+    padding: 14px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .source-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .source-name { font-weight: 600; font-size: 14px; }
+  .source-origin {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    margin-top: 4px;
+  }
+  .source-stats {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .source-actions { display: flex; gap: 6px; }
+
+  /* Buttons */
+  .btn {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+  .btn:hover { border-color: var(--accent); background: var(--bg-hover); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-dim); }
+  .btn-danger { color: var(--red); }
+  .btn-danger:hover { border-color: var(--red); background: rgba(248,113,113,0.1); }
+  .btn-sm { padding: 4px 10px; font-size: 11px; }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .breadcrumb a { color: var(--text-dim); }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--text-muted); }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .tab {
+    padding: 10px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--text-dim);
+    transition: all 0.1s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 12px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.error { border-color: var(--red); color: var(--red); }
+  .toast.success { border-color: var(--green); color: var(--green); }
+
+  /* Loading */
+  .loading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-muted);
+  }
+  .empty-state .icon { font-size: 36px; margin-bottom: 12px; }
+
+  /* Add source form */
+  .add-source-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .add-source-form input {
+    flex: 1;
+    padding: 8px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+  }
+  .add-source-form input:focus {
+    border-color: var(--accent);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <h1>
+      <span class="logo">&#x25C6;</span>
+      Agentic Index
+    </h1>
+    <div class="header-actions">
+      <div class="search-box">
+        <input id="searchInput" type="text" placeholder="Search index..." onkeydown="if(event.key==='Enter')doSearch()" />
+        <button onclick="doSearch()">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>Index Tree</h3>
+    </div>
+    <div class="tree-container" id="treeContainer"></div>
+  </aside>
+
+  <main class="main" id="mainContent">
+    <div class="loading" id="initialLoading">
+      <div class="spinner"></div>
+      Loading index...
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let treeData = null;
+let activeNodeId = null;
+
+// --- API ---
+async function api(path, opts = {}) {
+  const resp = await fetch(path, opts);
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({ detail: resp.statusText }));
+    throw new Error(err.detail || 'Request failed');
+  }
+  return resp.json();
+}
+
+// --- Toast ---
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast ' + type + ' show';
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// --- Tree ---
+function renderTree(node, container, depth = 0) {
+  const div = document.createElement('div');
+  div.className = 'tree-node';
+
+  const row = document.createElement('div');
+  row.className = 'tree-row' + (node.id === activeNodeId ? ' active' : '');
+  row.dataset.nodeId = node.id;
+
+  const toggle = document.createElement('span');
+  toggle.className = 'tree-toggle' + (node.children?.length && depth < 2 ? ' expanded' : '');
+  toggle.textContent = node.children?.length ? '\u25B6' : '';
+
+  const icon = document.createElement('span');
+  icon.className = 'tree-icon';
+  icon.textContent = node.is_leaf ? (node.ref_type === 'url' ? '\uD83C\uDF10' : '\uD83D\uDCC4') : '\uD83D\uDCC1';
+
+  const label = document.createElement('span');
+  label.className = 'tree-label';
+  label.textContent = node.title;
+  label.title = node.summary || node.title;
+
+  row.appendChild(toggle);
+  row.appendChild(icon);
+  row.appendChild(label);
+  div.appendChild(row);
+
+  if (node.children?.length) {
+    const childrenDiv = document.createElement('div');
+    childrenDiv.className = 'tree-children' + (depth >= 2 ? ' collapsed' : '');
+    node.children.forEach(c => renderTree(c, childrenDiv, depth + 1));
+    div.appendChild(childrenDiv);
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      childrenDiv.classList.toggle('collapsed');
+      toggle.classList.toggle('expanded');
+    });
+  }
+
+  row.addEventListener('click', () => selectNode(node.id));
+  container.appendChild(div);
+}
+
+function highlightTreeNode(nodeId) {
+  document.querySelectorAll('.tree-row.active').forEach(el => el.classList.remove('active'));
+  const el = document.querySelector(`.tree-row[data-node-id="${nodeId}"]`);
+  if (el) {
+    el.classList.add('active');
+    el.scrollIntoView({ block: 'nearest' });
+  }
+}
+
+// --- Navigation ---
+async function selectNode(nodeId) {
+  activeNodeId = nodeId;
+  highlightTreeNode(nodeId);
+
+  const main = document.getElementById('mainContent');
+  main.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+
+  try {
+    const node = await api(`/api/node/${nodeId}`);
+    renderNodeDetail(node);
+  } catch (e) {
+    main.innerHTML = `<div class="card"><p style="color:var(--red)">Error: ${e.message}</p></div>`;
+  }
+}
+
+function buildBreadcrumb(nodeId) {
+  const parts = nodeId.split('.');
+  const crumbs = [];
+  for (let i = 0; i < parts.length; i++) {
+    const id = parts.slice(0, i + 1).join('.');
+    crumbs.push(id);
+  }
+  return crumbs;
+}
+
+function renderNodeDetail(node) {
+  const main = document.getElementById('mainContent');
+  const crumbs = buildBreadcrumb(node.id);
+
+  let html = '<div class="breadcrumb">';
+  crumbs.forEach((id, i) => {
+    if (i > 0) html += '<span class="sep">/</span>';
+    const label = i === 0 ? 'Root' : id;
+    if (i < crumbs.length - 1) {
+      html += `<a href="#" onclick="selectNode('${id}');return false">${label}</a>`;
+    } else {
+      html += `<span>${label}</span>`;
+    }
+  });
+  html += '</div>';
+
+  html += '<div class="card">';
+  html += `<h2>${esc(node.title)}</h2>`;
+
+  html += '<div class="node-meta">';
+  html += `<span>ID: <code>${node.id}</code></span>`;
+  if (node.ref_type === 'url') html += `<span class="badge badge-url">URL</span>`;
+  else if (node.ref_type === 'file') html += `<span class="badge badge-file">FILE</span>`;
+  else html += `<span class="badge badge-group">GROUP</span>`;
+  html += `<span>${node.leaf_count} leaf${node.leaf_count !== 1 ? 's' : ''}</span>`;
+  if (node.child_count > 0) html += `<span>${node.child_count} children</span>`;
+  html += '</div>';
+
+  if (node.summary) {
+    html += `<div class="node-summary">${esc(node.summary)}</div>`;
+  }
+
+  if (node.ref) {
+    html += `<p style="font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:12px">${esc(node.ref)}</p>`;
+    html += `<button class="btn btn-primary" onclick="fetchContent('${node.id}')">Fetch Live Content</button>`;
+  }
+  html += '</div>';
+
+  if (node.children?.length) {
+    html += `<h3 style="margin-bottom:12px;font-size:14px;color:var(--text-dim)">Children (${node.children.length})</h3>`;
+    html += '<div class="children-list">';
+    node.children.forEach(child => {
+      const badge = child.ref_type === 'url' ? '<span class="badge badge-url">URL</span>'
+        : child.ref_type === 'file' ? '<span class="badge badge-file">FILE</span>'
+        : '<span class="badge badge-group">GROUP</span>';
+      html += `<div class="child-item" onclick="selectNode('${child.id}')">
+        <div class="child-info">
+          <div class="child-title">${esc(child.title)} ${badge}</div>
+          <div class="child-summary">${esc(child.summary || '')}</div>
+        </div>
+        <span style="color:var(--text-muted);font-size:12px">${child.leaf_count} leaves</span>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  main.innerHTML = html;
+}
+
+// --- Fetch Content ---
+async function fetchContent(nodeId) {
+  const main = document.getElementById('mainContent');
+  const btn = main.querySelector('.btn-primary');
+  if (btn) { btn.disabled = true; btn.textContent = 'Fetching...'; }
+
+  try {
+    const data = await api(`/api/fetch/${nodeId}`);
+    // Append content viewer below
+    let viewer = main.querySelector('.content-viewer');
+    if (!viewer) {
+      viewer = document.createElement('div');
+      viewer.className = 'content-viewer';
+      viewer.style.marginTop = '16px';
+      main.querySelector('.card').appendChild(viewer);
+    }
+    viewer.textContent = data.content;
+    if (btn) { btn.textContent = 'Refresh Content'; btn.disabled = false; }
+  } catch (e) {
+    toast(e.message, 'error');
+    if (btn) { btn.textContent = 'Fetch Live Content'; btn.disabled = false; }
+  }
+}
+
+// --- Search ---
+async function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) return;
+
+  const main = document.getElementById('mainContent');
+  main.innerHTML = '<div class="loading"><div class="spinner"></div>Searching...</div>';
+
+  try {
+    const results = await api(`/api/search?q=${encodeURIComponent(q)}&max_results=20`);
+    let html = `<div class="card"><h2>Search: "${esc(q)}"</h2><p>${results.length} results</p></div>`;
+
+    if (results.length === 0) {
+      html += '<div class="empty-state"><div class="icon">\uD83D\uDD0D</div><p>No results found</p></div>';
+    } else {
+      results.forEach(r => {
+        html += `<div class="search-result" onclick="selectNode('${r.node_id}')">
+          <span class="search-score">${r.score}</span>
+          <div class="child-title">${esc(r.title)}</div>
+          <div class="child-summary">${esc(r.summary || '')}</div>
+          ${r.ref ? `<div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);margin-top:4px">${esc(r.ref)}</div>` : ''}
+        </div>`;
+      });
+    }
+    main.innerHTML = html;
+  } catch (e) {
+    main.innerHTML = `<div class="card"><p style="color:var(--red)">Search error: ${e.message}</p></div>`;
+  }
+}
+
+// --- Dashboard ---
+async function showDashboard() {
+  const main = document.getElementById('mainContent');
+  main.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+
+  try {
+    const [stats, sources] = await Promise.all([api('/api/stats'), api('/api/sources')]);
+
+    let html = '<div class="stat-grid">';
+    html += statItem(stats.sources, 'Sources');
+    html += statItem(stats.total_nodes, 'Nodes');
+    html += statItem(stats.leaf_nodes, 'Leaves');
+    html += statItem(stats.max_depth, 'Max Depth');
+    html += '</div>';
+
+    html += '<div class="tabs">';
+    html += '<div class="tab active" onclick="switchTab(this,\'sourcesTab\')">Sources</div>';
+    html += '</div>';
+
+    html += '<div id="sourcesTab">';
+    if (sources.length === 0) {
+      html += '<div class="empty-state"><div class="icon">\uD83D\uDCC2</div><p>No sources indexed yet</p></div>';
+    } else {
+      sources.forEach(s => {
+        html += `<div class="source-card">
+          <div class="source-header">
+            <div>
+              <div class="source-name">${esc(s.id)}</div>
+              <div class="source-origin">${esc(s.origin)}</div>
+              <div class="source-stats">${s.page_count} pages &middot; ${s.type} &middot; ${new Date(s.crawled_at).toLocaleDateString()}</div>
+            </div>
+            <div class="source-actions">
+              <button class="btn btn-sm" onclick="updateSource('${s.id}')">Update</button>
+              <button class="btn btn-sm btn-danger" onclick="removeSource('${s.id}')">Remove</button>
+            </div>
+          </div>
+        </div>`;
+      });
+    }
+
+    html += `<div class="add-source-form">
+      <input id="newSourceInput" type="text" placeholder="URL or local path..." />
+      <button class="btn btn-primary" onclick="addSource()">Add Source</button>
+    </div>`;
+    html += '</div>';
+
+    main.innerHTML = html;
+  } catch (e) {
+    main.innerHTML = `<div class="card"><p style="color:var(--red)">Error: ${e.message}</p></div>`;
+  }
+}
+
+function statItem(value, label) {
+  return `<div class="stat-item"><div class="stat-value">${value}</div><div class="stat-label">${label}</div></div>`;
+}
+
+// --- Source Management ---
+async function addSource() {
+  const input = document.getElementById('newSourceInput');
+  const source = input.value.trim();
+  if (!source) return;
+
+  toast('Adding source... this may take a while', 'success');
+  try {
+    await api('/api/sources/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source }),
+    });
+    toast('Source added successfully!', 'success');
+    init();
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+async function removeSource(sourceId) {
+  if (!confirm(`Remove source "${sourceId}"?`)) return;
+  try {
+    await api(`/api/sources/${sourceId}`, { method: 'DELETE' });
+    toast('Source removed', 'success');
+    init();
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+async function updateSource(sourceId) {
+  toast('Updating source... this may take a while', 'success');
+  try {
+    await api(`/api/sources/${sourceId}/update`, { method: 'POST' });
+    toast('Source updated!', 'success');
+    init();
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+// --- Helpers ---
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function switchTab(el, tabId) {
+  el.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// --- Init ---
+async function init() {
+  try {
+    treeData = await api('/api/tree');
+    const container = document.getElementById('treeContainer');
+    container.innerHTML = '';
+    renderTree(treeData, container);
+    showDashboard();
+  } catch (e) {
+    document.getElementById('mainContent').innerHTML =
+      `<div class="card"><p style="color:var(--red)">Failed to load index: ${e.message}</p></div>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>

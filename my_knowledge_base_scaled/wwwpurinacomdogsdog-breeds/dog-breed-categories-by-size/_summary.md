@@ -1,0 +1,2 @@
+<!-- nav_summary: Dog Breeds by Size: Toy, Small, Medium, Large, Rare, Miniature, Unique -->
+This section provides a structured exploration of dog breeds categorized by size, offering detailed insights into **100+ breeds** across **Toy, Small, Medium, Large, Rare, Miniature/Teacup, and Unique** classifications. Each subcategory highlights breed-specific traits, care requirements, historical heritage, and practical companionship considerations, ensuring comprehensive guidance for breed selection, understanding, and responsible ownership.

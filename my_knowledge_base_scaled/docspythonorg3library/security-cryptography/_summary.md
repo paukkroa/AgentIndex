@@ -1,0 +1,4 @@
+<!-- nav_summary: Python’s cryptographic modules: hashing, HMAC, secure randomness -->
+The **Security & Cryptography** section of Python’s documentation provides a detailed overview of built-in cryptographic tools essential for secure data handling, authentication, and randomness generation. It covers core modules like `hashlib` for computing secure hash functions (e.g., SHA-256, MD5) and message digests, `hmac` for keyed-hashing to ensure message integrity via HMAC (RFC 2104), and `secrets` for cryptographically secure random number generation—critical for managing secrets like passwords or tokens. Together, these modules empower developers to implement robust security measures in applications requiring confidentiality, integrity, and non-repudiation.
+
+---

@@ -1,0 +1,2 @@
+<!-- nav_summary: CLI Features, Commands, & Automation -->
+The **CLI Functionality & Usage** section provides an in-depth exploration of the Codex terminal client’s capabilities, covering core features, command-line customization, keyboard shortcuts, and advanced scripting options. It outlines global flags for behavior adjustments, interactive vs. non-interactive execution modes, and optimized workflows for automation, CI/CD pipelines, and structured data processing.

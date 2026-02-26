@@ -1,0 +1,2 @@
+<!-- nav_summary: Low-energy & quiet breeds for apartments -->
+This section explores **low-energy and quiet dog breeds**, ideal for apartment living or noise-sensitive households. It provides a comprehensive overview of breeds known for their calm temperament, minimal exercise needs, and reduced barking, helping potential owners select the most suitable companion for a relaxed, low-maintenance lifestyle.

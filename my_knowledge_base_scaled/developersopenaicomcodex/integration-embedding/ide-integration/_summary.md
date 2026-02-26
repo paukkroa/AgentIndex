@@ -1,0 +1,2 @@
+<!-- nav_summary: Integrate Codex AI into VS Code/JetBrains -->
+The **IDE Integration** section provides a comprehensive guide to embedding OpenAI Codex AI into **VS Code** and **JetBrains** environments for enhanced coding assistance. It covers installation, core features (AI-driven code completion, cloud tasks, and web search), customization options (settings via editor or CLI), and detailed references for commands, keyboard shortcuts, and slash commands to optimize workflow efficiency.

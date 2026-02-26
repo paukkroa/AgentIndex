@@ -1,0 +1,4 @@
+<!-- nav_summary: Core data structures, strings, containers & constants -->
+This section provides an in-depth exploration of **data structures and collections** in Python, covering fundamental and advanced tools for handling data efficiently. It begins with **string manipulation and processing**, including regex, Unicode support, and templating, followed by **text formatting and wrapping** with GNU Readline and Python autocompletion. The **collections** subsection introduces specialized container datatypes like `deque`, `ChainMap`, and `Counter`, while **container data structures** delves into core modules and optimized structures. Finally, **built-in constants** (e.g., `None`, `True`, `False`) are documented for immutable system values, ensuring comprehensive coverage of both low-level and high-level data handling in Python.
+
+---

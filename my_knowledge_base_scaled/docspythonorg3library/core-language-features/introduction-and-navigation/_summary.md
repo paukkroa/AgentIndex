@@ -1,0 +1,2 @@
+<!-- nav_summary: Core Python types & standard library modules -->
+This section provides an overview of Python’s foundational tools, beginning with a general introduction to core types and functions before diving into the **Python Standard Library**, which offers essential modules, types, and built-in utilities for system-level and standardized programming tasks. It bridges beginners with foundational knowledge and experienced developers needing to leverage Python’s built-in capabilities for robust, efficient, and portable solutions.

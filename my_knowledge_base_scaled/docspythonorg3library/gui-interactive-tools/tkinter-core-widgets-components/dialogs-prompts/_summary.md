@@ -1,0 +1,4 @@
+<!-- nav_summary: Tkinter Dialogs & Message Prompts -->
+The **Dialogs & Prompts** section provides a detailed exploration of user interaction mechanisms in Tkinter, focusing on both input collection and system notifications. It covers **Tkinter Dialogs**, including input dialogs (e.g., for text, numbers, or file selection) and file picker interfaces, alongside **`tkinter.messagebox`**, which offers modal pop-up prompts with customizable icons (e.g., error, warning, info) and button configurations (OK, Yes/No, Retry/Cancel). This section bridges functional input handling with visual feedback, enabling developers to create responsive and user-friendly GUI applications.
+
+---

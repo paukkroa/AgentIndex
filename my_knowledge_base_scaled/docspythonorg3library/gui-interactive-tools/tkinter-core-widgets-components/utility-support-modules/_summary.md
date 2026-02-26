@@ -1,0 +1,4 @@
+<!-- nav_summary: Tkinter utility modules: color picker & font tools -->
+The **Utility & Support Modules** section of the `tkinter` library provides essential tools to enhance GUI functionality and streamline application development. The **`tkinter.colorchooser`** module offers a native color picker dialog, enabling users to select colors interactively with system-level consistency. Meanwhile, the **`tkinter.font`** module serves as a wrapper for font management, allowing developers to dynamically configure, query, and apply fonts within Tkinter applications. Together, these modules bridge foundational UI requirements, ensuring compatibility, customization, and ease of implementation for cross-platform graphical interfaces.
+
+---

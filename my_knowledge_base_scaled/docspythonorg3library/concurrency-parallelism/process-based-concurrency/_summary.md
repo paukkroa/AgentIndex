@@ -1,0 +1,4 @@
+<!-- nav_summary: Process-based parallelism & shared memory for CPU-bound tasks -->
+The **Process-Based Concurrency** section explores Python’s `multiprocessing` module, which enables true parallelism by leveraging multiple CPU cores through separate processes, bypassing the Global Interpreter Lock (GIL). It covers core concepts like process creation, lifecycle management, and the `Pool` abstraction for task distribution. Additionally, it delves into **shared memory mechanisms** (`multiprocessing.shared_memory`) for efficient inter-process communication (IPC), allowing direct memory access across processes to minimize overhead. This section bridges low-level process management with high-level concurrency patterns, emphasizing scalability, data isolation, and performance optimization for CPU-bound workloads.
+
+---

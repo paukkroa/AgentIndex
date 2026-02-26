@@ -1,0 +1,2 @@
+<!-- nav_summary: Medium breeds: 13+ breeds by energy, size, traits -->
+This section provides a comprehensive overview of **medium-sized dog breeds**, categorizing them by energy levels, size ranges (30–55 lbs), and distinct traits. It highlights 13 breeds with varying activity needs—from low to high energy—while also offering broader insights into over 20 breeds, organized by energy, size, and behavioral characteristics to help potential owners match the right breed to their lifestyle.

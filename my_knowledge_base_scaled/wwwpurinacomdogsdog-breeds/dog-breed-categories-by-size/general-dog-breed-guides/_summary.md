@@ -1,0 +1,2 @@
+<!-- nav_summary: Explore 100+ breeds by size & traits -->
+This section provides an in-depth exploration of **100+ dog breeds**, categorized by size, traits, and lifestyle compatibility, offering tailored insights for potential owners. It highlights **small and toy breeds**—ideal for compact living spaces—while emphasizing their playful, loyal, and adaptable personalities to help readers find the perfect match for their lifestyle.

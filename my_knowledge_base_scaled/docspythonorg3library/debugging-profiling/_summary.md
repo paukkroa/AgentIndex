@@ -1,0 +1,4 @@
+<!-- nav_summary: Debugging, profiling, and performance tools for Python -->
+This section provides an in-depth exploration of **debugging and profiling tools** essential for Python development, covering core frameworks, runtime analysis, and performance optimization. It includes the **Python Debugger (`pdb`)**, the **built-in debugger framework (`bdb`)**, and specialized modules like `faulthandler` for crash diagnostics. Additionally, it details **profiling tools** (`cProfile`, `profile`) for performance benchmarking, alongside the `timeit` module for precise execution-time measurements. The **Audit Events Table** in CPython is also documented, offering insights into runtime behavior for advanced debugging. Together, these resources empower developers to diagnose issues, optimize code, and analyze system behavior effectively.
+
+---

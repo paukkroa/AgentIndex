@@ -1,0 +1,4 @@
+<!-- nav_summary: Async I/O, Signals, & Memory-Mapped Files -->
+This section explores Python’s mechanisms for handling asynchronous I/O and concurrent operations, covering core libraries and techniques to optimize performance in non-blocking environments. The **`asyncio`** module provides a framework for writing asynchronous code using `async/await`, enabling efficient concurrency for I/O-bound tasks. The **`signal`** module allows developers to register custom handlers for asynchronous system signals, facilitating graceful event-driven responses. Additionally, the **`mmap`** module offers memory-mapped file I/O, bridging low-level file operations with high-level bytearray-like abstractions for cross-platform compatibility. Together, these tools empower developers to build scalable, responsive applications by managing concurrency, event handling, and efficient data access.
+
+---

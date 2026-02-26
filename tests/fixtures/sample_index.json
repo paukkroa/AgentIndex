@@ -1,0 +1,80 @@
+{
+  "version": "1.0",
+  "created_at": "2025-01-01T00:00:00Z",
+  "updated_at": "2025-01-01T00:00:00Z",
+  "sources": [
+    {
+      "id": "test-docs",
+      "type": "website",
+      "origin": "https://example.com/docs",
+      "crawled_at": "2025-01-01T00:00:00Z",
+      "page_count": 5
+    }
+  ],
+  "root": {
+    "id": "0",
+    "title": "Root",
+    "summary": "Test documentation covering getting started, API reference, and configuration.",
+    "ref": null,
+    "ref_type": null,
+    "source_id": null,
+    "children": [
+      {
+        "id": "0.0",
+        "title": "Test Docs",
+        "summary": "Documentation for the test project.",
+        "ref": null,
+        "ref_type": null,
+        "source_id": "test-docs",
+        "children": [
+          {
+            "id": "0.0.0",
+            "title": "Getting Started",
+            "summary": "How to install and set up the project.",
+            "ref": "https://example.com/docs/getting-started",
+            "ref_type": "url",
+            "source_id": "test-docs",
+            "children": []
+          },
+          {
+            "id": "0.0.1",
+            "title": "API Reference",
+            "summary": "Complete API documentation with endpoints and parameters.",
+            "ref": "https://example.com/docs/api",
+            "ref_type": "url",
+            "source_id": "test-docs",
+            "children": [
+              {
+                "id": "0.0.1.0",
+                "title": "Authentication",
+                "summary": "API authentication methods including OAuth and API keys.",
+                "ref": "https://example.com/docs/api/auth",
+                "ref_type": "url",
+                "source_id": "test-docs",
+                "children": []
+              },
+              {
+                "id": "0.0.1.1",
+                "title": "Endpoints",
+                "summary": "List of all available REST API endpoints.",
+                "ref": "https://example.com/docs/api/endpoints",
+                "ref_type": "url",
+                "source_id": "test-docs",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "0.0.2",
+            "title": "Configuration",
+            "summary": "Configuration options and environment variables.",
+            "ref": "https://example.com/docs/config",
+            "ref_type": "url",
+            "source_id": "test-docs",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}

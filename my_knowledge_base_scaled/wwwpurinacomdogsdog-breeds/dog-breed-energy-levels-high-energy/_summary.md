@@ -1,0 +1,2 @@
+<!-- nav_summary: High-energy breeds: Active dogs & running partners -->
+This section provides an in-depth exploration of **high-energy dog breeds**, tailored for owners seeking physically active companions. It highlights **12 of the most active breeds**—ideal for those with an energetic lifestyle—while also featuring **8 breeds particularly suited for runners or exercise partners**. The content emphasizes breed-specific traits, exercise needs, and compatibility with active owners, offering practical insights for selecting and managing high-energy dogs.

@@ -1,0 +1,4 @@
+<!-- nav_summary: Python XML Parsing: DOM, SAX, Expat, ElementTree -->
+This section provides an in-depth exploration of XML processing and parsing in Python, covering core techniques and libraries essential for handling XML data. It begins with **DOM-based parsing**, detailing Python’s modules for constructing, traversing, and manipulating XML trees in memory, followed by **SAX-based parsing**, which emphasizes event-driven, lightweight parsing via handlers and utilities. The section then examines **Expat**, a high-performance XML parser integrated into Python, and **ElementTree**, a fast, efficient module for parsing and manipulating XML documents. Finally, it consolidates these approaches under **Python’s XML Processing Modules**, offering a comparative overview of DOM, SAX, and ElementTree, along with their use cases, performance trade-offs, and integration into Python workflows.
+
+---

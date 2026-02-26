@@ -1,0 +1,4 @@
+<!-- nav_summary: Explore Codex: Install, integrate, and learn via guides & videos -->
+The **Getting Started** section provides a structured introduction to Codex, an AI-powered coding assistant, by offering multiple entry points for users to begin their development workflow. It begins with a **Combined Codex docs** overview, consolidating all guides and references into a single Markdown export for easy reference. The **Codex** subsection introduces the core AI assistant and its capabilities. The **Quickstart** guide outlines practical steps to integrate Codex into your environment—whether via the **macOS app, IDE plugins, CLI tools, or browser interface**—with clear instructions on signing in and initiating coding tasks. Finally, the **Videos** section complements these resources with **demos, walkthroughs, and expert talks**, ensuring users can visualize and understand Codex’s functionality through dynamic, multimedia content.
+
+---

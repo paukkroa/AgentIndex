@@ -1,0 +1,145 @@
+"""Multi-source composition for AgenticIndex."""
+
+from __future__ import annotations
+
+import logging
+from datetime import datetime, timezone
+
+from agentic_index.builder import IndexBuilder, _detect_source_type, _slugify
+from agentic_index.models import AgenticIndex, IndexNode
+from agentic_index.summarizer import Summarizer
+
+logger = logging.getLogger(__name__)
+
+
+async def _regenerate_root_summary(index: AgenticIndex, summarizer: Summarizer) -> None:
+    """Regenerate the root node summary from its children."""
+    if not index.root.children:
+        index.root.summary = "Empty index with no sources."
+        return
+
+    if len(index.root.children) == 1:
+        index.root.summary = index.root.children[0].summary
+        return
+
+    # Summarize from children
+    children_info = "\n".join(
+        f"- {child.title}: {child.summary}" for child in index.root.children
+    )
+    index.root.summary = await summarizer._call_llm(
+        "You are a technical documentation summarizer. Given the titles and summaries of indexed sources, write a concise 1-3 sentence overview.",
+        f"Indexed sources:\n{children_info}",
+    )
+
+
+async def add_source(
+    index: AgenticIndex,
+    source: str,
+    builder: IndexBuilder | None = None,
+) -> AgenticIndex:
+    """Add a new source to an existing index.
+
+    Builds the source tree and attaches it as a child of root.
+    """
+    builder = builder or IndexBuilder()
+    source_id = _slugify(source)
+    source_type = _detect_source_type(source)
+
+    # Determine ID prefix based on existing children count
+    child_idx = len(index.root.children)
+    id_prefix = f"0.{child_idx}"
+
+    logger.info("Adding source %s (id=%s) at prefix %s", source, source_id, id_prefix)
+
+    source_tree, source_meta, page_count = await builder.build_source_tree(
+        source, source_id, source_type, id_prefix
+    )
+
+    index.sources.append(source_meta)
+    index.root.children.append(source_tree)
+
+    # Regenerate root summary
+    summarizer = Summarizer(provider=builder._provider)
+    await _regenerate_root_summary(index, summarizer)
+
+    index.updated_at = datetime.now(timezone.utc)
+    return index
+
+
+async def update_source(
+    index: AgenticIndex,
+    source_id: str,
+    builder: IndexBuilder | None = None,
+) -> AgenticIndex:
+    """Re-crawl and rebuild a source within the index."""
+    builder = builder or IndexBuilder()
+
+    # Find existing source
+    source_meta = index.find_source(source_id)
+    if source_meta is None:
+        raise ValueError(f"Source not found: {source_id}")
+
+    # Find the child index for this source
+    child_idx = None
+    for i, child in enumerate(index.root.children):
+        if child.source_id == source_id:
+            child_idx = i
+            break
+
+    if child_idx is None:
+        raise ValueError(f"Source tree not found in index: {source_id}")
+
+    id_prefix = f"0.{child_idx}"
+    logger.info("Updating source %s at prefix %s", source_id, id_prefix)
+
+    new_tree, new_meta, page_count = await builder.build_source_tree(
+        source_meta.origin, source_id, source_meta.type, id_prefix
+    )
+
+    # Replace source metadata
+    for i, s in enumerate(index.sources):
+        if s.id == source_id:
+            index.sources[i] = new_meta
+            break
+
+    # Replace source tree
+    index.root.children[child_idx] = new_tree
+
+    # Regenerate root summary
+    summarizer = Summarizer(provider=builder._provider)
+    await _regenerate_root_summary(index, summarizer)
+
+    index.updated_at = datetime.now(timezone.utc)
+    return index
+
+
+async def remove_source(
+    index: AgenticIndex,
+    source_id: str,
+) -> AgenticIndex:
+    """Remove a source and its subtree from the index."""
+    # Remove source metadata
+    index.sources = [s for s in index.sources if s.id != source_id]
+
+    # Remove source tree from root children
+    index.root.children = [
+        child for child in index.root.children if child.source_id != source_id
+    ]
+
+    # Re-assign child IDs to keep them sequential
+    for i, child in enumerate(index.root.children):
+        _reassign_ids(child, f"0.{i}")
+
+    # Regenerate root summary
+    summarizer = Summarizer()
+    await _regenerate_root_summary(index, summarizer)
+
+    index.updated_at = datetime.now(timezone.utc)
+    return index
+
+
+def _reassign_ids(node: IndexNode, new_id: str) -> None:
+    """Recursively reassign hierarchical IDs."""
+    node.id = new_id
+    for i, child in enumerate(node.children):
+        _reassign_ids(child, f"{new_id}.{i}")

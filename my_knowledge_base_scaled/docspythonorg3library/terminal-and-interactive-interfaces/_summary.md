@@ -1,0 +1,4 @@
+<!-- nav_summary: Terminal tools: Input, curses, ASCII, panels -->
+The **Terminal and Interactive Interfaces** section covers Python modules and utilities designed for advanced terminal manipulation and input handling. It includes the `fileinput` module for iterating over lines from multiple input streams (files or `sys.stdin`), enabling flexible file processing workflows. The `curses` module provides a cross-platform interface to the **ncurses** library, facilitating low-level terminal control for character-cell displays, including cursor positioning, color management, and event handling. Supporting this are `curses.ascii`, which offers ASCII character utilities, and `curses.panel`, which extends `curses` with stackable window panels for layered terminal interfaces. Together, these components empower developers to build interactive, terminal-based applications with precision and portability.
+
+---

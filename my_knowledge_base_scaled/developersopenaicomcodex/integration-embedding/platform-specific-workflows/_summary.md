@@ -1,0 +1,2 @@
+<!-- nav_summary: Integrate Codex AI in GitHub, Linear, Slack -->
+The **Platform-Specific Workflows** section outlines how to integrate **Codex AI** into popular development and collaboration tools to streamline workflows. It covers automation in **GitHub** (PR reviews), **Linear** (issue delegation), and **Slack** (coding task triggers via `@Codex`), enabling seamless AI-driven assistance across platforms for developers and teams.

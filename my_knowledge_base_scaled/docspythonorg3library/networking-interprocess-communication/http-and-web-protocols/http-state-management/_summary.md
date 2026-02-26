@@ -1,0 +1,2 @@
+<!-- nav_summary: HTTP State Management: Cookies & Cookie Jars -->
+This section covers **HTTP state management**, focusing on mechanisms to persistently store and retrieve data across HTTP requests. It details **cookie parsing and handling**, including the `BaseCookie` and `SimpleCookie` classes for managing HTTP cookies, as well as the `http.cookiejar` module, which provides structured cookie storage and retrieval for HTTP clients. Together, these components enable robust session tracking, user authentication, and stateful interactions in HTTP-based applications.

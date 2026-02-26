@@ -1,0 +1,2 @@
+<!-- nav_summary: Dog breeds categorized by size & traits -->
+This section provides a categorized overview of dog breeds organized by size, offering detailed insights into their characteristics, suitability, and care considerations. It highlights **15 medium-sized breeds** (ranked by energy levels and traits), explores **10 giant breeds** ideal for families or protection roles, and features a deep dive into the **Chow Chow**, an ancient Chinese breed renowned for its majestic presence, muscular physique, and unique lion-like mane.

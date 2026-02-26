@@ -1,0 +1,4 @@
+<!-- nav_summary: Python filesystem paths & navigation tools -->
+This section provides a thorough exploration of **path manipulation and filesystem navigation** in Python, covering both modern and legacy approaches. It begins with an overview of core modules (`pathlib`, `os.path`, `shutil`, `tempfile`) essential for file and directory operations, then dives into **object-oriented path handling** with `pathlib` (Python 3.4+), emphasizing intuitive methods for path construction, traversal, and validation. The section also details **traditional `os.path` functions**—string-based utilities for common pathname manipulations like joining, splitting, and checking existence—while bridging to practical use cases like temporary file management. Together, these resources equip developers with robust tools for filesystem interaction, from basic path operations to advanced automation.
+
+---

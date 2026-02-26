@@ -1,0 +1,4 @@
+<!-- nav_summary: Explore 3 iconic toy breeds: Affenpinscher, Bolognese, Pug. -->
+The **Toy Breeds** section provides an in-depth exploration of small, historically cherished companion dogs, each with distinct physical traits, care requirements, and historical significance. From the expressive, terrier-like **Affenpinscher**—known for its mischievous charm and ancient lineage—to the velvety-coated **Bolognese**, celebrated for its elegant appearance and minimal exercise needs, this section covers breed-specific insights. The **Pug**, with its iconic wrinkles and affectionate demeanor, is detailed through its breed traits, health considerations, dietary needs, and rich history as a beloved lapdog. Together, these profiles highlight the unique characteristics, grooming demands, and care essentials of these diminutive yet impactful breeds, ideal for owners seeking loyal, low-to-moderate maintenance companions.
+
+---

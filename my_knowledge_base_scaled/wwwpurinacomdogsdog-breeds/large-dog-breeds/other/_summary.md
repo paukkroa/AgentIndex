@@ -1,0 +1,2 @@
+<!-- nav_summary: Large Breeds: Roles & Temperaments -->
+This section consolidates an expansive overview of **large dog breeds**, categorizing them by temperament, role, and personality traits—such as active/hunting, protective/guardian, or cuddly/companion types. With a total of **61 unique breeds** across five detailed subsections, it highlights diverse options for potential owners, including retrievers, herders, fluffy companions, and loyal giants, ensuring a comprehensive guide for selecting the ideal large-breed match.

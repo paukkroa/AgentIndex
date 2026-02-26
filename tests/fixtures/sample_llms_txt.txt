@@ -1,0 +1,11 @@
+# Claude Code Documentation
+
+> Claude Code is an agentic coding tool from Anthropic.
+
+## Docs
+
+- [Getting Started](https://code.claude.com/docs/en/getting-started): How to install and set up Claude Code
+- [Configuration](https://code.claude.com/docs/en/configuration): Configure Claude Code settings and preferences
+- [CLI Usage](https://code.claude.com/docs/en/cli-usage): Command-line interface reference
+- [MCP Servers](https://code.claude.com/docs/en/mcp-servers): Set up Model Context Protocol servers
+- [Hooks](https://code.claude.com/docs/en/hooks): Custom automation hooks for Claude Code

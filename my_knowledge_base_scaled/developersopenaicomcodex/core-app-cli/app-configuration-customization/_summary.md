@@ -1,0 +1,2 @@
+<!-- nav_summary: Customize Codex: Commands, shortcuts & settings -->
+The **App Configuration & Customization** section provides a detailed guide to tailoring the Codex app to individual workflows, covering both built-in commands and user-adjustable settings. Users can explore a reference for **keyboard shortcuts and app commands** to streamline interactions, while the **app settings panel** offers modular controls for fine-tuning file handling, integration preferences, and behavioral adjustments, ensuring a personalized and efficient experience.

@@ -1,0 +1,4 @@
+<!-- nav_summary: Binary parsing, encoding, and networking tools -->
+The **Binary Data Handling** section of the Python documentation covers essential modules and tools for parsing, packing, and manipulating binary data, text encodings, and network address representations. It includes the `struct` module, which enables conversion between Python values and C-style binary data via `bytes` objects, supporting low-level binary data manipulation. The `codecs` module provides a centralized registry and base classes for handling text encoding/decoding operations, ensuring compatibility with various character encodings. Additionally, the `ipaddress` module offers robust tools for manipulating IPv4 and IPv6 addresses, including validation, conversion, and network operations, introduced in Python 3. Together, these components empower developers to work with binary formats, text encodings, and network protocols efficiently.
+
+---

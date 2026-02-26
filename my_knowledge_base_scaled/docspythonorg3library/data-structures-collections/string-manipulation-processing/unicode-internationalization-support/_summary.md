@@ -1,0 +1,4 @@
+<!-- nav_summary: Unicode & I18n Modules: `unicodedata` & `stringprep` -->
+The **Unicode & Internationalization Support** section outlines Python’s built-in modules for handling Unicode and global text processing. The **`unicodedata`** module grants developers programmatic access to the **Unicode Character Database (UCD)**, enabling lookup of character properties (e.g., case folding, category, or bidirectional control) for robust text manipulation. Meanwhile, the **`stringprep`** module implements **RFC 3454** standards for **Unicode string normalization**, ensuring compatibility with internationalized domain names (IDNs) and network protocols by standardizing input strings before processing. Together, these modules empower developers to build applications that seamlessly support multilingual and non-Latin scripts while adhering to global interoperability standards.
+
+---

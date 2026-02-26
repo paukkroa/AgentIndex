@@ -1,0 +1,2 @@
+<!-- nav_summary: Medium/large breeds for work, sport, and companionship -->
+This section explores **Hunting & Versatile Breeds**, showcasing medium to large dogs bred for agility, endurance, and adaptability in diverse roles—from herding livestock (e.g., Australian Cattle Dogs) to hunting (Wirehaired Vizslas, Vizslas) and even as coach dogs (Dalmatian). Each breed highlights distinct traits like high energy, loyalty, and specialized coats (wiry, short, or spotted), with historical recognition (e.g., AKC) and lifespan considerations (10–13 years).

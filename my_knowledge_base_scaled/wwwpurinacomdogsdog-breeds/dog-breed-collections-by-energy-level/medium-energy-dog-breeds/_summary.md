@@ -1,0 +1,2 @@
+<!-- nav_summary: 15 adaptable medium-energy dog breeds -->
+This section explores **medium-energy dog breeds**, highlighting 15 adaptable and balanced companions ideal for active yet moderate lifestyles. It covers breed traits, exercise needs, and suitability for households seeking energetic yet manageable pets, offering insights into their adaptability and activity levels for informed ownership decisions.

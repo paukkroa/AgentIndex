@@ -1,0 +1,4 @@
+<!-- nav_summary: SAX XML Parsing: Handlers, Utilities & Parser Interface -->
+The **SAX-Based XML Parsing** section provides a detailed overview of the **Simple API for XML (SAX)** parsing framework in Python, focusing on event-driven XML processing. It covers core SAX2 parser support via the `xml.sax` module, foundational handler base classes (`ContentHandler`, `DTDHandler`, `EntityResolver`, `ErrorHandler`, `LexicalHandler`) for event-driven XML parsing, utility functions in `xml.sax.saxutils` for XML processing, and the `xml.sax.xmlreader` interface defining the contract for XML parsers. This section is essential for developers implementing lightweight, streaming XML parsers that prioritize performance over DOM-based tree structures.
+
+---

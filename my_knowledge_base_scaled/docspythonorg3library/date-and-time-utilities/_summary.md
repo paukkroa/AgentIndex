@@ -1,0 +1,4 @@
+<!-- nav_summary: Core date/time modules & timezone handling -->
+The **Date and Time Utilities** section provides a comprehensive overview of Python’s built-in modules and data types for handling date and time operations. It covers core data types (specialized and built-in) alongside the `datetime` module, which includes fundamental date/time classes (e.g., `datetime`, `date`, `time`), distinctions between timezone-aware and naive objects, and basic timezone handling. Additionally, it introduces the `zoneinfo` module, offering robust IANA timezone support via the `ZoneInfo` class for precise global time zone management. Together, these components enable developers to parse, manipulate, and format dates/times with accuracy and flexibility.
+
+---

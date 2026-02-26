@@ -1,0 +1,2 @@
+<!-- nav_summary: Small, affectionate toy & companion dog breeds overview. -->
+The **Toy & Companion Breeds** section explores small, affectionate, and low-maintenance canine companions, highlighting breeds like the **Cavalier King Charles Spaniel**, known for its gentle temperament and adaptability to family life, and the **Cesky Terrier**, a sturdy yet elegant Czech terrier with moderate energy and a distinctive gray coat, ideal for active yet relaxed households.

@@ -1,0 +1,2 @@
+<!-- nav_summary: GNU Readline & Python Autocompletion -->
+This section explores **text formatting and input handling** in Unix/Linux environments, focusing on GNU Readline’s advanced features for command-line editing. It covers the core GNU Readline library—including history navigation, tab-based autocompletion, and customizable keybindings—alongside Python’s `rlcompleter` module, which bridges Readline’s capabilities into Python scripts for seamless command-line interaction. Ideal for developers and sysadmins optimizing shell workflows or building interactive CLI tools.

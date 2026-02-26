@@ -1,0 +1,4 @@
+<!-- nav_summary: Python i18n/L10n: `gettext` & `locale` modules -->
+This section provides a deep dive into Python’s built-in tools for **internationalization (i18n)** and **localization (l10n)**, covering the core modules `gettext` and `locale`. The `gettext` module delivers robust multilingual support, including translation catalogs, message extraction, and language switching, while the `locale` module standardizes cultural conventions like date/time formatting, number representation, and monetary symbols according to POSIX standards. Together, these modules empower developers to build globally accessible applications with native-language compatibility and region-specific formatting.
+
+---

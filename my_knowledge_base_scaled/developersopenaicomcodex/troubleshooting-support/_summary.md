@@ -1,0 +1,4 @@
+<!-- nav_summary: Resolve issues, secure access, optimize environments, explore tasks, and contribute. -->
+The **Troubleshooting & Support** section provides a structured guide to resolving issues, optimizing performance, and leveraging Codex’s capabilities across Git, environments, and agent configurations. It covers debugging workflows (from Git fixes to prompt adjustments), securing agent internet access via allowlists and HTTP restrictions, managing cloud-based Docker environments (dependencies, caching, and task execution), and hands-on exploration through interactive tasks (e.g., Snake game, bug fixes). Additionally, it clarifies feature maturity levels for informed adoption and highlights open-source contributions to Codex’s ecosystem, bridging technical support with community collaboration.
+
+---

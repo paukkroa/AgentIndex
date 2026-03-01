@@ -20,6 +20,7 @@ dependencies = [
     "fastapi>=0.115",
     "uvicorn>=0.30",
     "rank-bm25>=0.2.2",
+    "streamlit>=1.54.0",
 ]
 
 [project.optional-dependencies]

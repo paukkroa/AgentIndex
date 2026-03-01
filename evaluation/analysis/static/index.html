@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Evaluation Suite</title>
+    <style>
+        :root { --bg-color: #f0f2f5; --card-bg: #ffffff; --text-color: #333; --border-color: #e0e0e0; --accent-color: #007bff; --info-bg: #e6f7ff; --code-bg: #f5f5f5; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 2rem; display: flex; flex-direction: column; align-items: center; }
+        .main-container { width: 100%; max-width: 900px; }
+        .tabs { display: flex; border-bottom: 1px solid var(--border-color); margin-bottom: 1rem; }
+        .tab { padding: 0.5rem 1rem; cursor: pointer; border-bottom: 2px solid transparent; }
+        .tab.active { border-bottom-color: var(--accent-color); font-weight: 600; }
+        .view { display: none; }
+        .view.active { display: block; }
+        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+        .card-header { font-size: 0.8rem; color: #666; margin-bottom: 1rem; }
+        .question { font-weight: 600; margin-bottom: 1rem; }
+        .gold-answer { background-color: var(--info-bg); padding: 1rem; border-radius: 4px; margin-bottom: 1rem; }
+        pre, code { background-color: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; white-space: pre-wrap; word-wrap: break-word; }
+        .ab-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .answer-box h3 { margin-top: 0; }
+        .controls { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
+        .controls button { font-size: 1rem; padding: 0.5rem 1rem; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--card-bg); cursor: pointer; }
+        .controls button:hover { background-color: #f0f0f0; }
+        .progress-text { text-align: center; margin-bottom: 0.5rem; font-size: 0.9rem; color: #555; }
+        .save-btn { position: fixed; top: 1rem; right: 1rem; padding: 0.5rem 1rem; background-color: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('ab_view')">A/B Blind Test</div>
+            <!-- Detailed Rating tab can be added here if needed -->
+        </div>
+
+        <div id="ab_view" class="view active">
+            <div id="ab-progress" class="progress-text"></div>
+            <div id="ab-card">
+                <div class="card">
+                    <div id="ab-card-header" class="card-header"></div>
+                    <p id="ab-question" class="question"></p>
+                    <div class="gold-answer">
+                        <strong>Gold Answer (Reference):</strong>
+                        <p id="ab-gold-answer"></p>
+                    </div>
+                </div>
+                <div class="ab-container">
+                    <div class="card answer-box">
+                        <h3>Answer A</h3>
+                        <pre id="ab-answer-a"></pre>
+                    </div>
+                    <div class="card answer-box">
+                        <h3>Answer B</h3>
+                        <pre id="ab-answer-b"></pre>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button onclick="handleABChoice('A')">A is Better (a)</button>
+                    <button onclick="handleABChoice('B')">B is Better (b)</button>
+                    <button onclick="handleABChoice('Neither')">Neither (n)</button>
+                </div>
+            </div>
+        </div>
+        <button class="save-btn" onclick="saveResults()">Save Progress</button>
+    </div>
+
+<script>
+const state = {
+    mode: 'ab',
+    abData: [],
+    abIndex: 0,
+    abResults: {},
+};
+
+// --- DOM Elements ---
+const ab = {
+    progress: document.getElementById('ab-progress'),
+    header: document.getElementById('ab-card-header'),
+    question: document.getElementById('ab-question'),
+    goldAnswer: document.getElementById('ab-gold-answer'),
+    answerA: document.getElementById('ab-answer-a'),
+    answerB: document.getElementById('ab-answer-b'),
+    card: document.getElementById('ab-card'),
+};
+
+// --- Core Functions ---
+async function init() {
+    try {
+        const response = await fetch('/api/data');
+        const data = await response.json();
+        state.abData = data.ab_test;
+        renderABCard();
+    } catch (error) {
+        console.error("Failed to load data:", error);
+        document.body.innerHTML = '<h1>Failed to load data from server. Is it running?</h1>';
+    }
+}
+
+function renderABCard() {
+    if (state.abIndex >= state.abData.length) {
+        ab.card.innerHTML = '<h1>A/B Test Complete! 🎉</h1><p>All pairs have been rated. You can now save your results.</p>';
+        ab.progress.textContent = `Complete! ${state.abData.length} / ${state.abData.length}`;
+        return;
+    }
+
+    const cardData = state.abData[state.abIndex];
+    ab.progress.textContent = `Pair ${state.abIndex + 1} of ${state.abData.length}`;
+    ab.header.textContent = `Q-ID: ${cardData.question_id} | Dataset: ${cardData.dataset}`;
+    ab.question.textContent = cardData.question_rag;
+    ab.goldAnswer.textContent = cardData.gold_answer_rag;
+    
+    // Randomize and display
+    const isSwapped = Math.random() < 0.5;
+    state.currentSysA = isSwapped ? 'agentic' : 'rag';
+    state.currentSysB = isSwapped ? 'rag' : 'agentic';
+
+    ab.answerA.textContent = cardData[`answer_${state.currentSysA}`];
+    ab.answerB.textContent = cardData[`answer_${state.currentSysB}`];
+}
+
+function handleABChoice(choice) {
+    const cardData = state.abData[state.abIndex];
+    const key = `${cardData.question_id}_${cardData.dataset}`;
+    let winner, loser;
+
+    if (choice === 'A') {
+        winner = state.currentSysA;
+        loser = state.currentSysB;
+    } else if (choice === 'B') {
+        winner = state.currentSysB;
+        loser = state.currentSysA;
+    } else {
+        winner = 'neither';
+        loser = 'neither';
+    }
+    
+    state.abResults[key] = { question_id: cardData.question_id, dataset: cardData.dataset, winner, loser };
+    navigate('next');
+}
+
+function navigate(direction) {
+    const maxIndex = state.abData.length;
+    if (direction === 'next') {
+        state.abIndex = Math.min(state.abIndex + 1, maxIndex);
+    } else if (direction === 'prev') {
+        state.abIndex = Math.max(state.abIndex - 1, 0);
+    }
+    renderABCard();
+}
+
+async function saveResults() {
+    const payload = {
+        mode: state.mode,
+        ratings: state.abResults,
+    };
+    try {
+        const response = await fetch('/api/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+        alert(result.message || 'Results saved!');
+    } catch (error) {
+        console.error("Failed to save results:", error);
+        alert('Error saving results. Check the console.');
+    }
+}
+
+// --- Event Listeners ---
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') navigate('next');
+    else if (e.key === 'ArrowLeft') navigate('prev');
+    else if (e.key === 'a') handleABChoice('A');
+    else if (e.key === 'b') handleABChoice('B');
+    else if (e.key === 'n') handleABChoice('Neither');
+});
+
+// --- Initial Load ---
+document.addEventListener('DOMContentLoaded', init);
+
+</script>
+</body>
+</html>

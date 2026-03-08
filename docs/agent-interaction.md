@@ -25,19 +25,20 @@ By default, `ls` returns **names only** — the cheapest possible listing. This 
 📁 /
 
 ### Subdirectories:
-- **claude-docs/**
-- **python-tutorial/**
+- **authentication/**
+- **deployment/**
+- **getting-started/**
 ```
 
-**With summaries (`ls("/claude-docs", depth=2, include_summaries=true)`):**
+**With summaries (`ls("/authentication", depth=2, include_summaries=true)`):**
 ```
-📁 /claude-docs
+📁 /authentication
 
 ### Subdirectories:
-- **getting-started/** — Install Claude Code and run your first command
-  - **installation.md**
-  - **quickstart.md**
-- **configuration/** — Environment variables, settings, and provider setup
+- **oauth/** — OAuth 2.0 flows, token exchange, and refresh handling
+  - **vendor-a-oauth-guide.md**
+  - **vendor-b-token-setup.md**
+- **saml/** — SAML 2.0 configuration and IdP integration
 ```
 
 ---
@@ -50,15 +51,18 @@ Searches for files and directories matching a substring or glob pattern across t
 |---|---|---|
 | `pattern` | string | Substring or glob pattern to match against file/directory names and paths. |
 
-Use `find` when you already know a keyword (e.g. `find("authentication")`) to jump directly to relevant paths without drilling down level by level.
+Use `find` when you already know a keyword (e.g. `find("authentication")`) to jump directly to relevant paths without drilling down level by level. Works across all sources in a multi-source index.
 
 **Example output (`find("auth")`):**
 ```
 ### Search results for 'auth':
 
-📁 /claude-docs/security
-  - authentication.md
-  - authorization.md
+📁 /authentication
+  - oauth/
+  - saml/
+
+📁 /authentication/oauth
+  - vendor-a-oauth-guide.md
 ```
 
 ---
@@ -73,34 +77,39 @@ Reads the YAML frontmatter and AI-generated summary for a document, or the `_sum
 
 This is the **"peek" tool** — it reads locally stored content and makes no network requests. Use it to verify a document is relevant before paying the cost of fetching the full live content.
 
-**Example output (`get_summary("/claude-docs/configuration/environment-variables.md")`):**
+**Example output (`get_summary("/authentication/oauth/vendor-a-oauth-guide.md")`):**
 ```
 ---
-id: 0.0.2.1
-title: "Environment Variables"
-nav_summary: "All supported env vars and their defaults"
-ref: https://docs.example.com/config/env-vars
+id: 0.0.1.2
+title: "OAuth 2.0 Guide"
+nav_summary: "OAuth flows, token exchange, and refresh token handling"
+ref: https://vendor-a.example.com/docs/oauth
 ref_type: url
+source_id: vendor-a
+content_hash: a3f1c8b2d4e7...
 ---
 
-# Environment Variables
+# OAuth 2.0 Guide
 
-Covers CLAUDE_API_KEY, CLAUDE_MODEL, MAX_TOKENS, and all other
-supported environment variables. Includes default values and examples
-for each provider (Ollama, Gemini).
+Covers the full OAuth 2.0 authorization code flow for Vendor A...
 ```
 
 ---
 
 ### `get_details(path)`
 
-Fetches the **full, live content** of a document from its original source URL.
+Fetches the **full content** of a document from its original source.
 
 | Parameter | Type | Description |
 |---|---|---|
 | `path` | string | Path to a `.md` file (must have been returned by a prior `ls` call). |
 
-Results are cached to `.cache/full_content/` after the first fetch. Use this when you need exact technical details, code examples, or step-by-step instructions that may not be fully captured in the AI summary.
+The behaviour depends on the document's `ref_type`:
+
+- **`ref_type: url`** — performs an HTTP GET to the original URL and returns the content as Markdown. Results are cached to `.cache/full_content/` after the first fetch.
+- **`ref_type: file`** — reads the file directly from the local filesystem. No network request is made.
+
+Use this when you need exact technical details, code examples, or step-by-step instructions that may not be fully captured in the AI summary.
 
 ---
 
@@ -111,10 +120,10 @@ Results are cached to `.cache/full_content/` after the first fetch. Use this whe
 The standard pattern for exploring an unfamiliar index:
 
 ```
-ls("/")                                    # See top-level categories
-ls("/claude-docs")                         # Drill into a category
-get_summary("/claude-docs/api/auth.md")    # Peek before fetching
-get_details("/claude-docs/api/auth.md")    # Fetch full content if relevant
+ls("/")                                         # See top-level categories
+ls("/authentication")                           # Drill into a category
+get_summary("/authentication/oauth/guide.md")   # Peek before fetching
+get_details("/authentication/oauth/guide.md")   # Fetch full content if relevant
 ```
 
 ### Find-then-drill
@@ -122,9 +131,9 @@ get_details("/claude-docs/api/auth.md")    # Fetch full content if relevant
 When you have a specific keyword in mind:
 
 ```
-find("rate limit")                         # Locate matching paths
-get_summary("/claude-docs/api/rate-limits.md")  # Confirm relevance
-get_details("/claude-docs/api/rate-limits.md")  # Get full content
+find("rate limit")                              # Locate matching paths
+get_summary("/api/rate-limits.md")              # Confirm relevance
+get_details("/api/rate-limits.md")              # Get full content
 ```
 
 ### Peek-before-fetch
@@ -132,9 +141,19 @@ get_details("/claude-docs/api/rate-limits.md")  # Get full content
 Use `get_summary` to scan several candidates before committing to `get_details`:
 
 ```
-ls("/claude-docs/api", include_summaries=true)  # See snippets for all docs
-get_summary("/claude-docs/api/streaming.md")    # Confirm it covers your topic
-get_details("/claude-docs/api/streaming.md")    # Fetch only if confirmed
+ls("/api", include_summaries=true)              # See snippets for all docs
+get_summary("/api/streaming.md")               # Confirm it covers your topic
+get_details("/api/streaming.md")               # Fetch only if confirmed
+```
+
+### Multi-source navigation
+
+In an index with multiple sources, the structure is the same regardless of whether the index was built in source-driven or semantic mode. Use `find` or `ls` normally — the `source_id` in `get_summary` output tells you which source a document came from if you need to know:
+
+```
+find("deployment")                             # Returns results across all sources
+get_summary("/deployment/vendor-a-k8s.md")    # source_id: vendor-a
+get_summary("/deployment/vendor-b-docker.md") # source_id: vendor-b
 ```
 
 ---
